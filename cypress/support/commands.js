@@ -52,3 +52,24 @@ Cypress.Commands.add('geraToken', (email, senha) => {
             return response.body.user.id
         })
  })
+
+Cypress.Commands.add('criarLivroViaApi', (token, livro) => {
+  return cy.request({
+    method: 'POST',
+    url: 'books',
+    headers: {
+      Authorization: token
+    },
+    body: livro
+  })
+})
+
+Cypress.Commands.add('deletarLivroViaApi', (token, id) => {
+  return cy.request({
+    method: 'DELETE',
+    url: `books/${id}`,
+    headers: {
+      Authorization: token
+    }
+  })
+})
